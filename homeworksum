@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+public class Main
+{
+	public static void main(String[] args) {
+	Scanner in = new Scanner(System.in);
+	System.out.println("Enter a value:");
+	String str = in.nextLine();
+	int n = str.length();
+    char[] alp = new char[n];
+    char[] notAlp = new char[n];
+    int top1 = -1;
+    int top2 = -1;
+   
+    //push
+       for(int i=0;i<n;i++){
+       char ch = str.charAt(i);
+       if(ch>='a' && ch<='z'){
+          top1++;
+          alp[top1] = ch;
+       }
+       else{
+           top2++;
+           notAlp[top2] = ch;
+       }
+       }
+  
+    //display
+      for(int i=top1;i>=0;i--){
+          System.out.print(alp[i]);
+      }
+      System.out.println();
+       for(int i=top2;i>=0;i--){
+          System.out.print(notAlp[i]);
+      }
+	
+	}
+}
