@@ -1,0 +1,94 @@
+import java.util.Scanner;
+class Stack{
+    int data;
+    Stack top = null;
+    
+    Stack(){
+        
+    }
+    
+    Stack(int v,Stack t){
+        this.data = v;
+        this.top = t;
+    }
+    
+    public void push(Scanner in){
+        System.out.println("Enter a value:");
+        int val = in.nextInt();
+        Stack obj = new Stack(val,top);
+        top = obj;
+    }
+    
+   public void pop(){
+         if(isEmpty()){
+             System.out.println("Stack is empty");
+         }
+         else{
+         top = top.top;
+         }
+    }
+    
+   public boolean isEmpty(){
+        if(top==null){
+            return true;
+        }
+        return false;
+    }
+    
+   public void peek(){
+         if(isEmpty()){
+             System.out.println("Stack is empty");
+         }
+         else{
+             System.out.println(top.data);
+         }
+    }
+    
+    public void display(){
+        if(isEmpty()){
+             System.out.println("Stack is empty");
+         }
+         else{
+        Stack temp = top;
+        while(temp!=null){
+            System.out.println(temp.data);
+            temp = temp.top;
+        }
+         }
+    }
+    
+}
+public class Main
+{
+	public static void main(String[] args) {
+	Scanner in = new Scanner(System.in);
+	Stack s = new Stack();
+	while(true){
+	    System.out.println("\n1)PUSH\n2)DISPLAY\n3)POP\n4)PEEK\n5)ISEMPTY");
+	    int choice = in.nextInt();
+	    switch(choice){
+	        case 1:{
+	            s.push(in);
+	            break;
+	        }
+	        case 2:{
+	            s.display();
+	            break;
+	        }
+	        case 3:{
+	            s.pop();
+	            break;
+	        }
+	        case 4:{
+	            s.peek();
+	            break;
+	        }
+	        case 5:{
+	            System.out.println(s.isEmpty());
+	            break;
+	        }
+	    }
+	}
+	
+	}
+}
