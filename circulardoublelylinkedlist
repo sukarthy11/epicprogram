@@ -1,1 +1,133 @@
+import java.util.Scanner;
 
+class Node{
+    int data;
+    Node prev,next;
+    Node head,tail;
+    
+    Node(){
+        
+    }
+    
+    public Node(Node prev,int data,Node next){
+        this.prev = prev;
+         this.data = data;
+        this.next = next;
+    }
+    
+    
+     void insertData(Scanner in){
+        System.out.println("Enter the no of data: ");
+        int n = in.nextInt();
+        System.out.println("Enter the val: ");
+        for(int i=0;i<n;i++){
+          
+            int val = in.nextInt();
+            Node obj = new Node(null,val,null);
+            if(head==null){
+                head=obj;
+                obj.prev=obj;
+            }
+            else{
+                tail.next=obj;
+                obj.prev=tail;
+            }
+            tail=obj;
+            head.prev = obj;
+            obj.next=head;
+        }
+    }
+    
+   void insertNode(Scanner in){
+        System.out.println("enter a position to insert:");
+        int pos = in.nextInt();
+        System.out.println("enter a value to insert:");
+        int val = in.nextInt();
+        Node newNode = new Node(null,val,null);
+        if(pos==1){
+            newNode.next = head;
+            head.prev = newNode;
+            head = newNode;
+            newNode.prev = tail;
+            tail.next = head;
+        }
+        else{
+        Node temp = head;
+        for(int i=0;i<pos-2;i++){
+           temp = temp.next;
+        }
+        if(temp.next==null){
+           tail = newNode;
+           tail.next = head;
+       }
+        newNode.next=temp.next;
+        temp.next = newNode;
+        temp.next.prev = newNode;
+        newNode.prev = temp;
+        }     
+   } 
+    
+    void displayData(){
+    Node temp = head;
+	while(temp.next!=head){
+	    System.out.println(temp.data);
+	    temp = temp.next;
+	}
+	if(temp.next==head){
+	     System.out.println(temp.data);
+	}
+    }
+    
+    void displayDataRev(){
+        System.out.println("reversed:");
+    Node temp = tail;
+	while(temp.prev!=tail){
+	    System.out.println(temp.data);
+	    temp = temp.prev;
+	}
+	if(temp.prev==tail){
+	     System.out.println(temp.data);
+	}
+    }
+    
+    void delete(Scanner in){
+        System.out.println("enter a position to delete:");
+        int pos = in.nextInt();
+        if(pos==1){
+            head.next.prev = tail;
+            head = head.next;
+            tail.next = head;
+        }
+        else{
+            Node temp = head;
+             for(int i=0;i<pos-2;i++){
+            temp = temp.next;
+        }
+        if(temp.next.next==head){
+         tail = temp;
+         
+        }
+         temp.next = temp.next.next;
+         temp.next.prev = temp;
+        }
+    }
+  
+}
+
+public class Main
+{
+	public static void main(String[] args) {
+	    Scanner in = new Scanner(System.in);
+		Node n = new Node();
+		n.insertData(in);
+		n.displayData();
+	//	n.displayDataRev();
+	//	n.insertNode(in);
+	   n.delete(in);
+    	n.displayData();
+	//	n.delete(in);
+	//	n.displayData();
+	    n.displayDataRev();
+	   
+	}
+}
